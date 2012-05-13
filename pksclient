@@ -1,0 +1,12 @@
+#!/bin/bash
+
+SERVER=$1
+KEYID=$3
+
+echo $KEYID >> requests
+
+if [ -f stop ] ; then
+    exit 1
+fi
+
+wget -q -O - "$SERVER/pks/lookup?op=get&search=$KEYID" | gpg --dearmor
